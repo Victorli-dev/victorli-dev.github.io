@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Analyst Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f5f0;
+      --ink: #1a1916;
+      --muted: #7a7670;
+      --accent: #c85a2a;
+      --line: #e0ddd6;
+      --card: #ffffff;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --mono: 'DM Mono', 'Courier New', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 4rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--muted);
+      font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 4rem 4rem;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .hero-inner { max-width: 720px; }
+    .hero-label {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-label::before {
+      content: ''; display: inline-block;
+      width: 32px; height: 1px; background: var(--accent);
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 1.8rem;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+    .hero-desc {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 480px;
+      margin-bottom: 3rem;
+      line-height: 1.9;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--ink); color: var(--bg);
+      padding: 0.85rem 2rem;
+      text-decoration: none; font-size: 12px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      transition: background 0.2s, color 0.2s;
+    }
+    .hero-cta:hover { background: var(--accent); }
+    .hero-cta svg { width: 14px; height: 14px; }
+
+    .hero-stats {
+      display: flex; gap: 3rem; margin-top: 5rem;
+      padding-top: 3rem; border-top: 1px solid var(--line);
+    }
+    .stat-num {
+      font-family: var(--serif); font-size: 2.2rem; color: var(--ink);
+    }
+    .stat-label {
+      font-size: 11px; color: var(--muted);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.2rem;
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 1100px; margin: 0 auto;
+      padding: 6rem 4rem;
+      border-top: 1px solid var(--line);
+    }
+    .section-header {
+      display: flex; align-items: baseline; gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+    .section-num {
+      font-size: 11px; color: var(--accent); letter-spacing: 0.15em;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 400; color: var(--ink);
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5px;
+      background: var(--line);
+    }
+    .project-card {
+      background: var(--card);
+      padding: 2.5rem;
+      transition: background 0.2s;
+      cursor: default;
+    }
+    .project-card:hover { background: #fdfcfa; }
+    .project-tag {
+      display: inline-block;
+      font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1rem;
+    }
+    .project-card h3 {
+      font-family: var(--serif); font-size: 1.35rem;
+      font-weight: 400; margin-bottom: 0.75rem; color: var(--ink);
+    }
+    .project-card p { color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .project-tools {
+      margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .tool-chip {
+      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 2.5rem;
+    }
+    .skill-group h4 {
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem; border-bottom: 1px solid var(--line);
+    }
+    .skill-list { list-style: none; }
+    .skill-list li {
+      font-size: 13px; color: var(--ink);
+      padding: 0.4rem 0;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .skill-list li::before {
+      content: '→'; font-size: 10px; color: var(--accent);
+    }
+
+    /* CONTACT */
+    #contact { border-bottom: 1px solid var(--line); }
+    .contact-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+      align-items: start;
+    }
+    .contact-text p { color: var(--muted); font-size: 13px; line-height: 1.9; }
+    .contact-links { display: flex; flex-direction: column; gap: 0; }
+    .contact-link {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none; color: var(--ink);
+      font-size: 13px;
+      transition: color 0.2s;
+      group: true;
+    }
+    .contact-link:first-child { border-top: 1px solid var(--line); }
+    .contact-link:hover { color: var(--accent); }
+    .contact-link span { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+    .contact-link:hover span { color: var(--accent); }
+    .contact-link svg { width: 14px; height: 14px; opacity: 0.4; transition: opacity 0.2s; }
+    .contact-link:hover svg { opacity: 1; }
+
+    /* FOOTER */
+    footer {
+      max-width: 1100px; margin: 0 auto;
+      padding: 2rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer p { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
+
+    /* ANIMATIONS */
+    .fade-in { opacity: 0; transform: translateY(18px); animation: fadeUp 0.7s ease forwards; }
+    .fade-in:nth-child(1) { animation-delay: 0.1s; }
+    .fade-in:nth-child(2) { animation-delay: 0.25s; }
+    .fade-in:nth-child(3) { animation-delay: 0.4s; }
+    .fade-in:nth-child(4) { animation-delay: 0.55s; }
+    .fade-in:nth-child(5) { animation-delay: 0.7s; }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      #hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-stats { gap: 2rem; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#">Alex Morgan</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div id="hero">
+    <div class="hero-inner">
+      <p class="hero-label fade-in">Data Analyst</p>
+      <h1 class="fade-in">Turning raw data<br>into <em>clear</em> answers.</h1>
+      <p class="hero-desc fade-in">
+        I work at the intersection of data, business, and storytelling — building dashboards, models, and analyses that help teams make better decisions.
+      </p>
+      <a href="#projects" class="hero-cta fade-in">
+        View my work
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M2 8h12M9 3l5 5-5 5"/>
+        </svg>
+      </a>
+      <div class="hero-stats fade-in">
+        <div>
+          <div class="stat-num">3+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="stat-num">20+</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div>
+          <div class="stat-num">5</div>
+          <div class="stat-label">Industries Served</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Selected Work</h2>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <span class="project-tag">Dashboard</span>
+        <h3>Sales Performance Tracker</h3>
+        <p>Built an interactive KPI dashboard for a retail client tracking revenue, churn, and regional performance across 40+ stores.</p>
+        <div class="project-tools">
+          <span class="tool-chip">Tableau</span>
+          <span class="tool-chip">SQL</span>
+          <span class="tool-chip">Excel</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-tag">Predictive Model</span>
+        <h3>Customer Churn Prediction</h3>
+        <p>Developed a logistic regression model identifying at-risk customers with 82% accuracy, enabling proactive retention campaigns.</p>
+        <div class="project-tools">
+          <span class="tool-chip">Python</span>
+          <span class="tool-chip">Scikit-learn</span>
+          <span class="tool-chip">Pandas</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-tag">Data Pipeline</span>
+        <h3>Automated Reporting System</h3>
+        <p>Replaced a manual 6-hour weekly reporting process with a fully automated pipeline delivering fresh insights every morning.</p>
+        <div class="project-tools">
+          <span class="tool-chip">Python</span>
+          <span class="tool-chip">Airflow</span>
+          <span class="tool-chip">BigQuery</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-tag">Analysis</span>
+        <h3>Marketing Attribution Study</h3>
+        <p>Analyzed multi-touch attribution across paid channels, revealing a 30% misallocation of budget and redirecting spend more effectively.</p>
+        <div class="project-tools">
+          <span class="tool-chip">SQL</span>
+          <span class="tool-chip">R</span>
+          <span class="tool-chip">Looker</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-tag">Visualization</span>
+        <h3>Supply Chain Risk Map</h3>
+        <p>Created a geospatial visualization of supplier risk scores, helping procurement teams prioritize vendor reviews and reduce exposure.</p>
+        <div class="project-tools">
+          <span class="tool-chip">Python</span>
+          <span class="tool-chip">Plotly</span>
+          <span class="tool-chip">GeoPandas</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-tag">A/B Testing</span>
+        <h3>Pricing Experiment Analysis</h3>
+        <p>Designed and analyzed a pricing A/B test for a SaaS product, providing statistical confidence that led to a 12% revenue increase.</p>
+        <div class="project-tools">
+          <span class="tool-chip">Python</span>
+          <span class="tool-chip">Statistics</span>
+          <span class="tool-chip">Excel</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Skills & Tools</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <ul class="skill-list">
+          <li>Python</li>
+          <li>SQL</li>
+          <li>R</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Visualization</h4>
+        <ul class="skill-list">
+          <li>Tableau</li>
+          <li>Power BI</li>
+          <li>Looker</li>
+          <li>Plotly / Matplotlib</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Data & Cloud</h4>
+        <ul class="skill-list">
+          <li>BigQuery</li>
+          <li>Snowflake</li>
+          <li>dbt</li>
+          <li>Apache Airflow</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Analysis</h4>
+        <ul class="skill-list">
+          <li>Statistical Modeling</li>
+          <li>A/B Testing</li>
+          <li>Forecasting</li>
+          <li>Predictive Analytics</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Get in Touch</h2>
+    </div>
+    <div class="contact-inner">
+      <div class="contact-text">
+        <p>
+          I'm always open to new projects, freelance work, or just a conversation about data. Feel free to reach out through any of the channels below.
+        </p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:alex@example.com" class="contact-link">
+          alex@example.com
+          <span>Email
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:middle;margin-left:4px;"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+          </span>
+        </a>
+        <a href="https://linkedin.com" target="_blank" class="contact-link">
+          linkedin.com/in/alexmorgan
+          <span>LinkedIn
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:middle;margin-left:4px;"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+          </span>
+        </a>
+        <a href="https://github.com" target="_blank" class="contact-link">
+          github.com/alexmorgan
+          <span>GitHub
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:middle;margin-left:4px;"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Alex Morgan</p>
+    <p>Data Analyst — Available for freelance</p>
+  </footer>
+
+</body>
+</html>
