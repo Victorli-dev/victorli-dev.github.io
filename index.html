@@ -232,6 +232,85 @@
       .hero-stats { gap: 2rem; }
       footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
     }
+
+    /* CHAT */
+    #chat-launcher {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      width: 48px;
+      height: 48px;
+      background: var(--ink);
+      color: var(--bg);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: background 0.2s;
+    }
+    #chat-launcher:hover { background: var(--accent); }
+
+    #chat-window {
+      position: fixed;
+      bottom: 5.5rem;
+      right: 2rem;
+      z-index: 200;
+      width: 380px;
+      height: 560px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      transform: translateY(12px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+    #chat-window.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    #chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 1.2rem;
+      border-bottom: 1px solid var(--line);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    #chat-close {
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--muted);
+      transition: color 0.2s;
+      line-height: 1;
+    }
+    #chat-close:hover { color: var(--accent); }
+
+    #chat-iframe {
+      flex: 1;
+      width: 100%;
+      border: none;
+    }
+
+    @media (max-width: 768px) {
+      #chat-window {
+        right: 0;
+        bottom: 4.5rem;
+        width: 100vw;
+        height: 70vh;
+      }
+      #chat-launcher { bottom: 1.2rem; right: 1.2rem; }
+    }
   </style>
 </head>
 <body>
@@ -438,6 +517,51 @@
     <p>© 2026 Victor Li</p>
     <p>Data Analyst — Aspiring Data Scientist</p>
   </footer>
+<!-- Chat Launcher Button -->
+<button id="chat-launcher" aria-label="Open chat">💬</button>
 
+<!-- Chat Window -->
+<div id="chat-window" role="dialog" aria-label="Chat">
+  <div id="chat-header">
+    Chat with me
+    <span id="chat-close" role="button" aria-label="Close chat">✖</span>
+  </div>
+  <iframe
+    id="chat-iframe"
+    src="about:blank"
+    data-src="https://portfolio-agent-dsj9gyedulfsagray93jkz.streamlit.app/"
+    title="Chat">
+  </iframe>
+</div>
+
+<script>
+  (function () {
+    const launcher = document.getElementById('chat-launcher');
+    const window_  = document.getElementById('chat-window');
+    const closeBtn = document.getElementById('chat-close');
+    const iframe   = document.getElementById('chat-iframe');
+    let loaded = false;
+
+    function open() {
+      if (!loaded) {
+        iframe.src = iframe.dataset.src;
+        loaded = true;
+      }
+      window_.classList.add('open');
+      launcher.setAttribute('aria-expanded', 'true');
+    }
+
+    function close() {
+      window_.classList.remove('open');
+      launcher.setAttribute('aria-expanded', 'false');
+    }
+
+    launcher.addEventListener('click', function () {
+      window_.classList.contains('open') ? close() : open();
+    });
+
+    closeBtn.addEventListener('click', close);
+  })();
+</script>
 </body>
 </html>
